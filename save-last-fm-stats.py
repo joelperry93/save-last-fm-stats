@@ -33,7 +33,7 @@ def printBands(bandsArray):
 
 
 def saveBands(data):
-	filePath = 'saves/' + time.strftime('%y%m%d') + '.json'
+	filePath = 'saves/' + time.strftime('%y-%m-%d') + '.json'
 	
 	with open(filePath, 'w') as outfile:
 		json.dump(data, outfile)
@@ -49,4 +49,6 @@ saveBands(bands)
 
 
 
-	
+
+
+
