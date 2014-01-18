@@ -19,8 +19,11 @@ def makeBandsArray(data):
 	artists = []
 	
 	for artist in data["weeklyartistchart"]["artist"]:
-		artists.append(artist["name"])
-		
+		artists.append({
+			"name" 	: artist["name"], 
+			"plays"	: artist["playcount"]
+		})
+	
 	return artists
 
 
@@ -29,15 +32,11 @@ def printBands(bandsArray):
 		print artist
 
 
-def saveBands(bandsArray):
-	timeString = time.strftime('%y%m%d') 
-	file 		= open('saves/' + timeString + '.txt', 'w')
+def saveBands(data):
+	filePath = 'saves/' + time.strftime('%y%m%d') + '.json'
 	
-	for band in bandsArray:
-		file.write(band + ', ')
-	
-	file.write('\n')
-	file.close() 
+	with open(filePath, 'w') as outfile:
+		json.dump(data, outfile)
 
 
 # -------------------
@@ -45,7 +44,7 @@ def saveBands(bandsArray):
 # -------------------
 bands = makeBandsArray(getLastFMData(getConfigDict()))
 
-printBands(bands)
+#printBands(bands)
 saveBands(bands)
 
 
